@@ -6,6 +6,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Equivalence",
+            "request": "launch",
+            "mainClass": "Equivalence"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - HelloJava",
             "request": "launch",
             "mainClass": "HelloJava"

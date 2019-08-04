@@ -48,3 +48,40 @@ p:  for(int i=1; i<=10 ;i++)
 Integer results[] = {new Integer(3), new Integer(5)};
 float f4[] = new float[]{1.0f, 2.0f, 3.0f};
 String[] dogs = new String[]{new String("Fido"), new String("Spike")};
+~~~
+
+## 20190804
+### 面向对象（上）
+- 不能对构造方法指定类型，它有隐含的返回值，该值由系统内部使用，如果指定了相应的类型，则该方法就不是构造方法
+- 当构造方法中的参数名与域变量名相同时，此时在构造方法中需要用this关键字来区分，或者使用下划线避免同名
+-  静态代码块：一个类中可以使用不包含在任何方法体中的静态代码块。当类被装载时，静态代码块被执行且只被执行一次：
+~~~
+class StaticCodeBlock{
+    static int value;
+    static{
+        value = 3;
+        System.out.println("value = " + value);
+    }
+    public static void main(String[] args){
+
+    }
+}
+~~~
+
+- 单件模式是设计模式的一种，它确保一个类有且仅有一个对象，可以这样实现：
+~~~
+public class FighterPlane{
+    private String name;
+    private int missileNum;
+    private FighterPlane(String _name, int _missileNum){
+        name = _name;
+        missileNum = _missileNum;
+    }
+    public static FighterPlane getInstance(String _name, int _missileNum){
+        if(fp == null){
+            fp = new FighterPlane(_name, _missileNum);
+            return fp;
+        }
+    }
+}
+~~~

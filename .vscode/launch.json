@@ -6,6 +6,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - IntClassConstructor",
+            "request": "launch",
+            "mainClass": "IntClassConstructor"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - TestArgs",
             "request": "launch",
             "mainClass": "TestArgs"

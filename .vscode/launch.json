@@ -6,6 +6,18 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - TestArgs",
+            "request": "launch",
+            "mainClass": "TestArgs"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Assign",
+            "request": "launch",
+            "mainClass": "Assign"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Equivalence",
             "request": "launch",
             "mainClass": "Equivalence"

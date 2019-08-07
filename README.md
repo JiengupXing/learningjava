@@ -85,3 +85,72 @@ public class FighterPlane{
     }
 }
 ~~~
+
+## 20190805
+
+- 继承时父类的属性统统被复制到子类中，包括父类中的private成员，但是子类对象内部无法直接访问，必须通过父类接口方法访问
+
+- 重载的多种方法之间往往存在一定的调用关系，即一个方法写有实现功能，其他方法采用委托方式进行调用。
+  
+~~~
+public AudioClip getAudioClip(URL url){
+    ... //真正的实现代码
+}
+public AudioClip getAudioClip(URL url, String name){
+    ... //其他代码
+    //通过重新构造一个新的URL对象，之后调用上面的同名方法
+    return getAudioClip(new URL(url, name))
+}
+
+~~~
+
+- 子类定义的方法与父类名称相同（大小写完全匹配），但参数不同，不是覆盖，二是重载；如果名称，参数相同，返回值不同，则编译不能通过
+  
+- 同名的非static和非static方法之间不能覆盖，方法前有final修饰符时，此方法不能在子类中进行覆盖
+
+## 20190807
+### 面向对象（下）
+- this可以指代当前对象，而super没有类似功能，即没有指代父类对象的功能；子类和父类定义了同名变量，则子类对象中将父类定义的同名域变量隐藏，子类如果使用父类的x，则必须采用“super.x”的形式，覆盖的父类方法同理
+
+- 一个类的若干个重载的构造方法之间可以相互调用，且必须使用关键字this来调用重载的其他构造方法，最大限度地提高对已有代码的复用程度,构造方法的调用必须为构造方法中的第一句
+~~~
+class AddClass{
+    public int x = 0, y = 0, z = 0;
+    AddClass(int x){
+        this.x = x;
+    }
+    AddClass(int x, int y){
+        this(x);
+        this.y = y;
+    }
+    AddClass(int x, int y, int z){
+        this(x, y);
+        this.z = z;
+    }
+}
+
+~~~
+
+- 同理，子类可以调用父类的构造方法
+~~~
+public class SonAddClass extend AddClass{
+    int a = 0, b = 0, c = 0;
+    SonAddClass(int x){
+        super(x);
+        a = x + 7;
+    }
+    SonAddClass(int x, int y){
+        super(x, y);
+        a = x + 5;
+        b = y + 7;
+    }
+    SonAddClass(int x, int y, int z){
+        super(x, y, z);
+        a = x + 3;
+        b = y + 3;
+        c = z + 3;
+    }
+}
+~~~
+- 成员方法中的变量如果不赋初值，则系统会提示变量没有初始化，但类的域变量则不进行提示，因为在于类生成对象时，可以进行默认初始化，类的静态属性如果不赋值，也会被默认初始化
+- 

@@ -6,6 +6,18 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - RunShapes",
+            "request": "launch",
+            "mainClass": "RunShapes"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Run",
+            "request": "launch",
+            "mainClass": "Run"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - IntClassConstructor",
             "request": "launch",
             "mainClass": "IntClassConstructor"

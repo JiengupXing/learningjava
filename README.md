@@ -265,4 +265,76 @@ public class GetCurrentTime{
 }
 ~~~
 
-- 
+## 20190821
+### 线程
+- java产生线程有两种方法：一种是继承Thread类，且覆盖其run方法；另一种就是实现Runnable接口，并将实现类对象作为参数传递给Thread类的构造方法。Thread类将Runnable接口中的run方法实现为空方法，并定义许多用于创建和控制线程的方法，Thread的定义部分为：
+
+        public class Thread extends Object implements Runnable;
+- Runnable接口中的run方法是一个抽象方法，其实现类的run方法中定义的内容就是线程执行的任务，因而实现类的run方法又称为线程体。run方法无参数，且返回值为void，否则不是线程体
+  
+~~~
+public class MyThread implements Runnable{
+	public static void main(String[] args) {
+		MyThread my = new MyThread();
+		Thread a = new Thread(my);
+		a.start();
+		System.out.println("This is main thread");
+	}
+	public void run() {
+		System.out.println("This is another thread");
+	}
+}
+~~~
+
+- 线程要得到启动必须调用其start方法，而不是单纯地调用run方法，start方法会产生一个新的线程，脱离原有的线程单独运行
+
+~~~
+//多线程并发
+class MyThread extends Thread{
+	public void run() {
+		while(true) {
+			System.out.println(Thread.currentThread().getName() + " is running");
+		}
+	}
+}
+public class TestMyThread{
+	public static void main(String[] args) {
+		new MyThread().start();//new MyThread().run();
+        //若为run则不回执行下面的语句，因为直接进入了死循环
+		while(true) {
+			System.out.println("main1 is runniung");
+		}
+	}
+}
+~~~
+
+
+- 使用实现Runnable接口更多原因是多个线程可以共享实现类对象的资源
+
+~~~
+class Resource implements Runnable{
+	public int i;
+	public Resource(int _i) {
+		i = _i;
+	}
+	public void run() {
+		while(true) {
+			if(i > 0) {
+				System.out.println(Thread.currentThread().getName() + " is running" + i);
+				i--;
+			}
+			else
+				break;
+		}
+	}
+}
+public class TestMyThread{
+	public static void main(String[] args) {
+		Resource m = new Resource(100);
+		Thread t1 = new Thread(m);
+		Thread t2 = new Thread(m);
+		t1.start();
+		t2.start();
+	}
+}
+~~~
